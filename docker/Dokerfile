@@ -1,0 +1,12 @@
+FROM golang:1-alpine
+LABEL maintainer="Anaaas"
+
+RUN apk add --no-cache git \
+  && go get -d -v github.com/anasdh06/eagles \
+  && go install github.com/anasdh06/eagles@latest \
+  && rm -rf ~/go/src/github.com/anasdh06/eagles \
+  && apk del git
+
+ENTRYPOINT ["eagles"]
+
+CMD ["--help"]
